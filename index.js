@@ -27,7 +27,7 @@ class Compiler {
                         const variableValue = variables[printLine];
                         if(Array.isArray(variableValue)) {
                             output.push(variableValue);
-                        } else output.push(variableValue.slice(0, -1));
+                        }
                     }
 
                     break;
