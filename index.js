@@ -42,8 +42,8 @@ class Compiler {
 
     run() {
         const compiledCode = this.compile();
-        if(compiledCode === Array) {
-            compiledCode.forEach(line => console.log(line))
+        if(Array.isArray(compiledCode)) {
+            console.log(compiledCode.join('\n'))
         } else console.log(compiledCode)
     }
 }
