@@ -1,2 +1,2 @@
 # gScript
-gScript is a new programming language built with JavaScript
+A new programming language built on JavaScript ✨

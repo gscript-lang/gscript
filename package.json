@@ -1,0 +1,25 @@
+{
+  "name": "gscript",
+  "version": "1.0.0",
+  "description": "A new programming language built on JavaScript ✨",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtgsquad/gscript.git"
+  },
+  "author": "molai.dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mtgsquad/gscript/issues"
+  },
+  "homepage": "https://github.com/mtgsquad/gscript#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}
