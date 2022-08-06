@@ -2,7 +2,7 @@
 A new programming language built on JavaScript ✨
 
 ## Install
-`npm install gscript -g`
+`npm install gscript-compiler -g`
 
 ## Compiling a file
 `gs ./path/to/file.gs`
@@ -22,7 +22,8 @@ At the moment, there are only two keywords, `def`, and `print`.
 <br/>
 All keywords must be suffixed with `:`.
 <br/>
-Examples:
+
+## Examples:
 
 ```gs
 def: HW = "Hello World"
