@@ -9,7 +9,8 @@ A new programming language built on JavaScript ✨
 <br>
 or
 <br>
-`gs ./path/to/file.gs`
+
+`gscript ./path/to/file.gs`
 
 ## Syntax
 At the moment, there are only two keywords, `def`, and `print`.
