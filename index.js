@@ -12,12 +12,24 @@ class Compiler {
         const output = [];
 
         for (const line of this.code) {
-            if (line.startsWith("print")) {
+            switch(true) {
+                case line.startsWith("print"): 
+                    const compiledLine = line.slice(7, -1);
+                    output.push(compiledLine);
+                    break;
+                case !line.startsWith("print"):
+                    output.push("Error: Invalid syntax.");
+                    break;
+                
+            }
+            /**
+             * if (line.startsWith("print")) {
                 const compiledLine = line.slice(7, -1);
                 output.push(compiledLine);
             } else {
                 output.push("Error: Invalid syntax.");
             }
+             */
         }
 
         return output;
