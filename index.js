@@ -19,35 +19,28 @@ class Compiler {
                 case line.startsWith("//"):
                     break;
                 case line.startsWith("print"): 
-                    if(line.includes('"')) {
+                    if(line.includes('print: "')) {
                         const printLine = line.trim().slice(8, -1);
                         output.push(printLine);
                     } else {
                         const printLine = line.trim().slice(7);
                         const variableValue = variables[printLine];
-                        console.log(variableValue.slice(1, -2));
+                        if(Array.isArray(variableValue)) {
+                            output.push(variableValue);
+                        } else output.push(variableValue.slice(0, -1));
                     }
 
                     break;
-                case line.startsWith("def"):
+                case line.startsWith("def"):  
                     const defArray = line.slice(5).split(" = ");
                     const variableName = defArray[0];
                     variables[variableName] = defArray[1];
-                    
                     break;
                 case !line.startsWith("print"):
                     output.push("Error: Invalid syntax.");
                     break;
                 
             }
-            /**
-             * if (line.startsWith("print")) {
-                const compiledLine = line.slice(7, -1);
-                output.push(compiledLine);
-            } else {
-                output.push("Error: Invalid syntax.");
-            }
-             */
         }
 
         return output;
