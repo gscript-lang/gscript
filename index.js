@@ -1,52 +1,33 @@
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
-*/
-const fs = require('fs');
+ */
+const fs = require("fs");
 
 class Compiler {
     constructor(file) {
-        this.code = fs.readFileSync(file).toString();
+        this.code = fs.readFileSync(file, "utf-8").split("\n");
     }
 
     compile() {
-        if(this.code.includes('\n')) {
-            const multiLineCode = this.code.split('\n');
-            const Result = [];
-            const allTheOthers = multiLineCode.slice(0, 1);
-            const last = multiLineCode.slice(allTheOthers.length);
-            
-            allTheOthers.forEach(line => {
-                if(line.startsWith("print")) {
-                    const compiledLine = line.slice(7, -2);
-                    Result.push(compiledLine);
-                } else {
-                    Result.push("Error: One Of The Lines Is Not Valid Syntax Or A Keyword")
-                }
-            });
-            last.forEach(line => {
-                if(line.startsWith("print")) {
-                    const compiledLine = line.slice(7, -1);
-                    Result.push(compiledLine);
-                } else {
-                    Result.push("Error: One Of The Lines Is Not Valid Syntax Or A Keyword")
-                }
-            })
+        const output = [];
 
-            return Result;
-        } else {
-            if(this.code.startsWith('print')) {
-                return this.code.slice(7, -1);
-            } else return "Only print is supported!";
+        for (const line of this.code) {
+            if (line.startsWith("print")) {
+                const compiledLine = line.slice(7, -1);
+                output.push(compiledLine);
+            } else {
+                output.push("Error: Invalid syntax.");
+            }
         }
+
+        return output;
     }
 
     run() {
-        const compiledCode = this.compile();
-        if(Array.isArray(compiledCode)) {
-            console.log(compiledCode.join('\n'))
-        } else console.log(compiledCode)
+        const output = this.compile();
+        console.log(output.join("\n"));
     }
 }
 
-const compiler = new Compiler('tests/test.gs');
+const compiler = new Compiler("tests/test.gs");
 compiler.run();

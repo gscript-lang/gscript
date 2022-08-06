@@ -20,6 +20,5 @@
   },
   "homepage": "https://github.com/mtgsquad/gscript#readme",
   "dependencies": {
-    "fs": "^0.0.1-security"
   }
 }
