@@ -1,2 +1,2 @@
-# molaiscript
-A new programming language based on JavaScript.
+# gScript
+gScript is a new programming language built with JavaScript
