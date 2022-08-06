@@ -14,7 +14,7 @@ class Compiler {
         for (const line of this.code) {
             switch(true) {
                 case line.startsWith("print"): 
-                    const compiledLine = line.slice(7, -1);
+                    const compiledLine = line.trim().slice(7, -1);
                     output.push(compiledLine);
                     break;
                 case !line.startsWith("print"):
