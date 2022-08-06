@@ -10,12 +10,28 @@ class Compiler {
 
     compile() {
         const output = [];
+        const variables = {};
 
         for (const line of this.code) {
             switch(true) {
+                case line.startsWith("//"):
+                    break;
                 case line.startsWith("print"): 
-                    const compiledLine = line.trim().slice(7, -1);
-                    output.push(compiledLine);
+                    if(line.includes('"')) {
+                        const printLine = line.trim().slice(8, -1);
+                        output.push(printLine);
+                    } else {
+                        const printLine = line.trim().slice(7);
+                        const variableValue = variables[printLine];
+                        console.log(variableValue.slice(1, -2));
+                    }
+
+                    break;
+                case line.startsWith("def"):
+                    const defArray = line.slice(5).split(" = ");
+                    const variableName = defArray[0];
+                    variables[variableName] = defArray[1];
+                    
                     break;
                 case !line.startsWith("print"):
                     output.push("Error: Invalid syntax.");
