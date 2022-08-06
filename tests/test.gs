@@ -1,1 +1,2 @@
-print "This is a file test"
+print "Line 1"
+print "Line 2"
