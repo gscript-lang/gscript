@@ -43,7 +43,7 @@ class Compiler {
     run() {
         const compiledCode = this.compile();
         if(compiledCode === Array) {
-            console.log(compiledCode);
+            compiledCode.forEach(line => console.log(line))
         } else console.log(compiledCode)
     }
 }
