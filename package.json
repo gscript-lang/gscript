@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A new programming language built on JavaScript ✨",
   "main": "index.js",
+  "bin": {
+    "gs": "./index.js",
+    "gscript": "./index.js"
+  },
   "directories": {
     "test": "tests"
   },

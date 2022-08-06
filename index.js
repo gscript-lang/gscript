@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
  */
@@ -57,5 +59,7 @@ class Compiler {
     }
 }
 
-const compiler = new Compiler("tests/test.gs");
+const filePath = process.argv.slice(2);
+
+const compiler = new Compiler(filePath[0]);
 compiler.run();
