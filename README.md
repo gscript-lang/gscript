@@ -18,12 +18,12 @@ A new programming language built on TypeScript ✨
 
 ## Running A File
 
-`gs ./path/to/file.gs`
+`gs run ./path/to/file.gs`
 <br>
 or
 <br>
 
-`gscript ./path/to/file.gs`
+`gscript run ./path/to/file.gs`
 
 ## Syntax
 
