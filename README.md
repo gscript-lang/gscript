@@ -4,7 +4,11 @@ A new programming language built on JavaScript ✨
 ## IN EARLY DEVELOPMENT STAGES
 
 ## Install
+### Using NPM
 `npm install gscript-compiler -g`
+
+### Using Yarn
+`yarn global add gscript-compiler`
 
 ## Compiling a file
 `gs ./path/to/file.gs`
