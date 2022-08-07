@@ -25,9 +25,11 @@ class Compiler {
                     } else {
                         const printLine = line.trim().slice(7);
                         const variableValue = variables[printLine];
-                        if(Array.isArray(variableValue)) {
-                            output.push(variableValue);
-                        }
+                        if(variableValue.startsWith('"')) {
+                            output.push(variableValue.slice(1, -2))
+                        } else if(variableValue.startsWith('[')) {
+                            output.push(variableValue)
+                        } else output.push(variableValue);
                     }
 
                     break;

@@ -1,2 +1,2 @@
-def: variable1 = "["This is my first variable"]"
+def: variable1 = ["This is my first variable"]
 print: variable1 
