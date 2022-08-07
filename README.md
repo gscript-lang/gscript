@@ -1,5 +1,5 @@
 # gScript
-A new programming language built on JavaScript ✨
+A new programming language built on TypeScript ✨
 
 ## IN EARLY DEVELOPMENT STAGES
 
