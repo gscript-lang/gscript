@@ -23,6 +23,7 @@
     "url": "https://github.com/mtgsquad/gscript/issues"
   },
   "homepage": "https://github.com/mtgsquad/gscript#readme",
-  "dependencies": {
+  "devDependencies": {
+    "@types/node": "^18.6.4"
   }
 }
