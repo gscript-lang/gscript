@@ -27,8 +27,6 @@ class Compiler {
                         const variableValue = variables[printLine];
                         if(variableValue.startsWith('"')) {
                             output.push(variableValue.slice(1, -2))
-                        } else if(variableValue.startsWith('[')) {
-                            output.push(variableValue)
                         } else output.push(variableValue);
                     }
 
@@ -37,6 +35,10 @@ class Compiler {
                     const defArray = line.slice(5).split(" = ");
                     const variableName = defArray[0];
                     variables[variableName] = defArray[1];
+                    /**
+                     * console.log('VARS:');
+                     * console.log(variables);
+                     */
                     break;
                 case !line.startsWith("print"):
                     output.push("Error: Invalid syntax.");
