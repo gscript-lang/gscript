@@ -1,6 +1,8 @@
 # gScript
 A new programming language built on JavaScript ✨
 
+## IN EARLY DEVELOPMENT STAGES
+
 ## Install
 `npm install gscript-compiler -g`
 
