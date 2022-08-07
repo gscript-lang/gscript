@@ -18,27 +18,30 @@ var Compiler = /** @class */ (function () {
                 case line.startsWith("//"):
                     break;
                 case line.startsWith("print"):
-                    if (line.includes('print: "')) {
+                    if (line.startsWith('print: "')) {
                         var printLine = line.trim().slice(8, -1);
                         output.push(printLine);
                     }
                     else if (line.includes("operation")) {
                         var printLine = line.trim().slice(7).split(" ");
-                        var numbers = printLine.slice(1);
-                        if (!numbers.includes("+") && !numbers.includes("-") && !numbers.includes("*") && !numbers.includes("/")) {
+                        var operationData = printLine.slice(1);
+                        if (!operationData.includes("+") &&
+                            !operationData.includes("-") &&
+                            !operationData.includes("*") &&
+                            !operationData.includes("/")) {
                             output.push("Incorrect Syntax");
                         }
-                        else if (numbers[1] === "+") {
-                            output.push(Number(numbers[0]) + Number(numbers[2]));
+                        else if (operationData[1] === "+") {
+                            output.push(Number(operationData[0]) + Number(operationData[2]));
                         }
-                        else if (numbers[1] === "-") {
-                            output.push(Number(numbers[0]) - Number(numbers[2]));
+                        else if (operationData[1] === "-") {
+                            output.push(Number(operationData[0]) - Number(operationData[2]));
                         }
-                        else if (numbers[1] === "*") {
-                            output.push(Number(numbers[0]) * Number(numbers[2]));
+                        else if (operationData[1] === "*") {
+                            output.push(Number(operationData[0]) * Number(operationData[2]));
                         }
-                        else if (numbers[1] === "/") {
-                            output.push(Number(numbers[0]) / Number(numbers[2]));
+                        else if (operationData[1] === "/") {
+                            output.push(Number(operationData[0]) / Number(operationData[2]));
                         }
                     }
                     else {
@@ -48,28 +51,30 @@ var Compiler = /** @class */ (function () {
                             output.push(variableValue.slice(1, -2));
                         }
                         else if (variableValue.includes("operation")) {
-                            var numbers = variableValue.split(" ").slice(1);
-                            if (!numbers.includes("+") && !numbers.includes("-") && !numbers.includes("*") && !numbers.includes("/")) {
+                            var operationData = variableValue.split(" ").slice(1);
+                            if (!operationData.includes("+") &&
+                                !operationData.includes("-") &&
+                                !operationData.includes("*") &&
+                                !operationData.includes("/")) {
                                 output.push("Incorrect Syntax");
                             }
-                            else if (numbers[1] === "+") {
-                                output.push(Number(numbers[0]) + Number(numbers[2]));
+                            else if (operationData[1] === "+") {
+                                output.push(Number(operationData[0]) + Number(operationData[2]));
                             }
-                            else if (numbers[1] === "-") {
-                                output.push(Number(numbers[0]) - Number(numbers[2]));
+                            else if (operationData[1] === "-") {
+                                output.push(Number(operationData[0]) - Number(operationData[2]));
                             }
-                            else if (numbers[1] === "*") {
-                                output.push(Number(numbers[0]) * Number(numbers[2]));
+                            else if (operationData[1] === "*") {
+                                output.push(Number(operationData[0]) * Number(operationData[2]));
                             }
-                            else if (numbers[1] === "/") {
-                                output.push(Number(numbers[0]) / Number(numbers[2]));
+                            else if (operationData[1] === "/") {
+                                output.push(Number(operationData[0]) / Number(operationData[2]));
                             }
                         }
                     }
                     break;
                 case line.startsWith("operation"):
-                    var line2 = line.slice(5).split(" ");
-                    console.log(line2);
+                    output.push("Invalid Syntax");
                     break;
                 case line.startsWith("def"):
                     var defArray = line.slice(5).split(" = ");

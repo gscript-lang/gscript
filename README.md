@@ -1,16 +1,21 @@
 # gScript
+
 A new programming language built on TypeScript ✨
 
 ## IN EARLY DEVELOPMENT STAGES
 
 ## Install
+
 ### Using NPM
+
 `npm install gscript-compiler -g`
 
 ### Using Yarn
+
 `yarn global add gscript-compiler`
 
 ## Compiling a file
+
 `gs ./path/to/file.gs`
 <br>
 or
@@ -19,6 +24,7 @@ or
 `gscript ./path/to/file.gs`
 
 ## Syntax
+
 At the moment, there are only two keywords, `def`, and `print`.
 <br/>
 `def` defines a variable and it's corresponding value.
@@ -33,15 +39,16 @@ All keywords must be suffixed with `:`.
 ## Examples:
 
 ```gs
-def: HW = "Hello World"
-print: HW 
+def: HW = "Hello World";
+print: HW;
 // returns Hello World
 ```
+
 <br/>
 
 ```gs
-def: MyArr = ["MyArray"]
-print: MyArr
+def: MyArr = ["MyArray"];
+print: MyArr;
 // returns ["MyArray"]
 ```
 
@@ -49,6 +56,6 @@ print: MyArr
 
 ```gs
 // print a string
-print: "This is a string"
+print: "This is a string";
 // returns This is a string
 ```
