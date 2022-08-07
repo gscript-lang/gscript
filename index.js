@@ -22,14 +22,45 @@ class Compiler {
                     if(line.includes('print: "')) {
                         const printLine = line.trim().slice(8, -1);
                         output.push(printLine);
+                    } else if(line.includes("sum")) {
+                        const printLine = line.trim().slice(7).split(" ");
+                        const numbers = printLine.slice(1);
+                        if(!numbers.includes("+") && !numbers.includes("-") && !numbers.includes("*") && !numbers.includes("/")) {
+                            output.push("Incorrect Syntax");
+                        } else if(numbers[1] === "+") {
+                            output.push(Number(numbers[0]) + Number(numbers[2]))
+                        } else if(numbers[1] === "-") {
+                            output.push(Number(numbers[0]) - Number(numbers[2]))
+                        } else if(numbers[1] === "*") {
+                            output.push(Number(numbers[0]) * Number(numbers[2]))
+                        } else if(numbers[1] === "/") {
+                            output.push(Number(numbers[0]) / Number(numbers[2]))
+                        }
                     } else {
                         const printLine = line.trim().slice(7);
                         const variableValue = variables[printLine];
-                        if(variableValue.startsWith('"')) {
-                            output.push(variableValue.slice(1, -2))
-                        } else output.push(variableValue);
+                        if(!variableValue.includes("sum")) {
+                            output.push(variableValue.slice(1, -1));
+                        } else if(variableValue.includes("sum")) {
+                            const numbers = variableValue.split(" ").slice(1);
+                            if(!numbers.includes("+") && !numbers.includes("-") && !numbers.includes("*") && !numbers.includes("/")) {
+                                output.push("Incorrect Syntax");
+                            } else if(numbers[1] === "+") {
+                                output.push(Number(numbers[0]) + Number(numbers[2]))
+                            } else if(numbers[1] === "-") {
+                                output.push(Number(numbers[0]) - Number(numbers[2]))
+                            } else if(numbers[1] === "*") {
+                                output.push(Number(numbers[0]) * Number(numbers[2]))
+                            } else if(numbers[1] === "/") {
+                                output.push(Number(numbers[0]) / Number(numbers[2]))
+                            }
+                        }
                     }
 
+                    break;
+                case line.startsWith("sum"):
+                    const line2 = line.slice(5).split(" ");
+                    console.log(line2);
                     break;
                 case line.startsWith("def"):  
                     const defArray = line.slice(5).split(" = ");
