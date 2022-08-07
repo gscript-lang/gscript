@@ -41,7 +41,7 @@ class Compiler {
                         const printLine = line.trim().slice(7);
                         const variableValue = variables[printLine];
                         if(!variableValue.includes("operation")) {
-                            output.push(variableValue.slice(1, -1));
+                            output.push(variableValue.slice(1, -2));
                         } else if(variableValue.includes("operation")) {
                             const numbers = variableValue.split(" ").slice(1);
                             if(!numbers.includes("+") && !numbers.includes("-") && !numbers.includes("*") && !numbers.includes("/")) {

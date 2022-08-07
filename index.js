@@ -45,7 +45,7 @@ var Compiler = /** @class */ (function () {
                         var printLine = line.trim().slice(7);
                         var variableValue = variables[printLine];
                         if (!variableValue.includes("operation")) {
-                            output.push(variableValue.slice(1, -1));
+                            output.push(variableValue.slice(1, -2));
                         }
                         else if (variableValue.includes("operation")) {
                             var numbers = variableValue.split(" ").slice(1);

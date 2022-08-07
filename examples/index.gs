@@ -1,2 +1,2 @@
-def: num = "0"
-print: num
+def: test = "This is a test string."
+print: test
