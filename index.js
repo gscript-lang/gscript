@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin node
 "use strict";
 exports.__esModule = true;
 /**

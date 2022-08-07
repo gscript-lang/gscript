@@ -1,6 +1,6 @@
 {
   "name": "gscript-compiler",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A new programming language built on JavaScript ✨",
   "main": "index.js",
   "bin": {
