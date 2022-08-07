@@ -2,19 +2,21 @@
 
 A new programming language built on TypeScript ✨
 
+> Note: This is the interpreter/"compiler" lib, the CLI tool is used in the given examples.
+
 ## IN EARLY DEVELOPMENT STAGES
 
 ## Install
 
 ### Using NPM
 
-`npm install gscript-compiler -g`
+`npm install gscript-cli -g`
 
 ### Using Yarn
 
-`yarn global add gscript-compiler`
+`yarn global add gscript-cli`
 
-## Compiling a file
+## Running A File
 
 `gs ./path/to/file.gs`
 <br>

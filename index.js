@@ -1,6 +1,6 @@
-#!/usr/bin/env node
 "use strict";
 exports.__esModule = true;
+exports.Compiler = void 0;
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
  */
@@ -98,6 +98,4 @@ var Compiler = /** @class */ (function () {
     };
     return Compiler;
 }());
-var filePath = process.argv.slice(2);
-var compiler = new Compiler(filePath[0]);
-compiler.run();
+exports.Compiler = Compiler;
