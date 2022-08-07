@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin node
 
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
