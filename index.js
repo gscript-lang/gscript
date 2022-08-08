@@ -20,7 +20,11 @@ var Compiler = /** @class */ (function () {
                 case line.startsWith("print"):
                     if (line.startsWith('print: "')) {
                         var printLine = line.trim().slice(8, -1);
-                        output.push(printLine);
+                        if (line.endsWith(".split()")) {
+                            output.push(line.trim().slice(8, -9).split(" "));
+                        }
+                        else
+                            output.push(printLine);
                     }
                     else if (line.includes("operation")) {
                         var printLine = line.trim().slice(7).split(" ");
@@ -80,11 +84,6 @@ var Compiler = /** @class */ (function () {
                     var defArray = line.slice(5).split(" = ");
                     var variableName = defArray[0];
                     variables[variableName] = defArray[1];
-                    /**
-                     * console.log('VARS:');
-                     * console.log(variables);
-                     */
-                    break;
                 case !line.startsWith("print"):
                     output.push("Error: Invalid syntax.");
                     break;
