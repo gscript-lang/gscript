@@ -5,13 +5,13 @@ import * as fs from "fs";
 
 class Compiler {
   code: any;
-  constructor(file) {
+  constructor(file: string) {
     this.code = fs.readFileSync(file, "utf-8").split("\n");
   }
 
   compile() {
-    const output: any = [];
-    const variables = {};
+    const output: any[] = [];
+    const variables: any = {};
 
     for (const line of this.code) {
       switch (true) {
@@ -42,7 +42,7 @@ class Compiler {
             }
           } else {
             const printLine = line.trim().slice(7);
-            const variableValue = variables[printLine];
+            const variableValue: string = variables[printLine as keyof object];
             if (!variableValue.includes("operation")) {
               output.push(variableValue.slice(1, -2));
             } else if (variableValue.includes("operation")) {
@@ -80,13 +80,8 @@ class Compiler {
           break;
         case line.startsWith("def"):
           const defArray = line.slice(5).split(" = ");
-          const variableName = defArray[0];
-          variables[variableName] = defArray[1];
-          /**
-           * console.log('VARS:');
-           * console.log(variables);
-           */
-          break;
+          const variableName: string = defArray[0];
+          variables[variableName as keyof typeof variables] = defArray[1];
         case !line.startsWith("print"):
           output.push("Error: Invalid syntax.");
           break;
