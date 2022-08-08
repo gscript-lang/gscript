@@ -20,7 +20,9 @@ class Compiler {
         case line.startsWith("print"):
           if (line.startsWith('print: "')) {
             const printLine: any = line.trim().slice(8, -1);
-            output.push(printLine);
+            if(line.endsWith(".split()")) {
+              output.push(line.trim().slice(8, -9).split(" "));
+            } else output.push(printLine);
           } else if (line.includes("operation")) {
             const printLine: any = line.trim().slice(7).split(" ");
             const operationData: any = printLine.slice(1);
