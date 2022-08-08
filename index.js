@@ -5,6 +5,7 @@ exports.Compiler = void 0;
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
  */
 var fs = require("fs");
+var axios_1 = require("axios");
 var Compiler = /** @class */ (function () {
     function Compiler(file) {
         this.code = fs.readFileSync(file, "utf-8").split("\n");
@@ -99,3 +100,8 @@ var Compiler = /** @class */ (function () {
     return Compiler;
 }());
 exports.Compiler = Compiler;
+if (process.argv[2] == "--version") {
+    axios_1["default"].get("https:\/\/raw.githubusercontent.com/gscript-lang/gscript/v1/package.json").then(function (res) {
+        console.log(res.data.version);
+    });
+}

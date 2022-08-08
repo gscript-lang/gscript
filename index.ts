@@ -2,6 +2,7 @@
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
  */
 import * as fs from "fs";
+import axios from "axios";
 
 class Compiler {
   code: any;
@@ -100,6 +101,15 @@ class Compiler {
     const output = this.compile();
     console.log(output.join("\n"));
   }
+}
+
+
+if (process.argv[2] == "--version") {
+  axios.get("https:\/\/raw.githubusercontent.com/gscript-lang/gscript/v1/package.json").then(
+    res => {
+      console.log(res.data.version);
+    }
+  )
 }
 
 export { Compiler };
