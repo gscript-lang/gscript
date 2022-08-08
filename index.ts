@@ -20,8 +20,14 @@ class Compiler {
         case line.startsWith("print"):
           if (line.startsWith('print: "')) {
             const printLine: any = line.trim().slice(8, -1);
+            const res: any = [];
             if(line.endsWith(".split()")) {
-              output.push(line.trim().slice(8, -9).split(" "));
+              line.slice(8, -9).split(" ").forEach((word: any) => {
+                res.push(`${word}`)
+              });
+
+              output.push(res);
+              console.log(output);
             } else output.push(printLine);
           } else if (line.includes("operation")) {
             const printLine: any = line.trim().slice(7).split(" ");
@@ -84,7 +90,7 @@ class Compiler {
           const defArray = line.slice(5).split(" = ");
           const variableName: string = defArray[0];
           variables[variableName as keyof typeof variables] = defArray[1];
-        case !line.startsWith("print"):
+        case !line.startsWith("print") && !line.startsWith("def") && !line.startsWith("//"):
           output.push("Error: Invalid syntax.");
           break;
       }
@@ -95,7 +101,9 @@ class Compiler {
 
   run() {
     const output = this.compile();
-    console.log(output.join("\n"));
+    for(const line of output) {
+      console.log(line)
+    }
   }
 }
 

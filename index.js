@@ -12,16 +12,20 @@ var Compiler = /** @class */ (function () {
     Compiler.prototype.compile = function () {
         var output = [];
         var variables = {};
-        for (var _i = 0, _a = this.code; _i < _a.length; _i++) {
-            var line = _a[_i];
+        var _loop_1 = function (line) {
             switch (true) {
                 case line.startsWith("//"):
                     break;
                 case line.startsWith("print"):
                     if (line.startsWith('print: "')) {
                         var printLine = line.trim().slice(8, -1);
+                        var res_1 = [];
                         if (line.endsWith(".split()")) {
-                            output.push(line.trim().slice(8, -9).split(" "));
+                            line.slice(8, -9).split(" ").forEach(function (word) {
+                                res_1.push("".concat(word));
+                            });
+                            output.push(res_1);
+                            console.log(output);
                         }
                         else
                             output.push(printLine);
@@ -84,16 +88,23 @@ var Compiler = /** @class */ (function () {
                     var defArray = line.slice(5).split(" = ");
                     var variableName = defArray[0];
                     variables[variableName] = defArray[1];
-                case !line.startsWith("print"):
+                case !line.startsWith("print") && !line.startsWith("def") && !line.startsWith("//"):
                     output.push("Error: Invalid syntax.");
                     break;
             }
+        };
+        for (var _i = 0, _a = this.code; _i < _a.length; _i++) {
+            var line = _a[_i];
+            _loop_1(line);
         }
         return output;
     };
     Compiler.prototype.run = function () {
         var output = this.compile();
-        console.log(output.join("\n"));
+        for (var _i = 0, output_1 = output; _i < output_1.length; _i++) {
+            var line = output_1[_i];
+            console.log(line);
+        }
     };
     return Compiler;
 }());
