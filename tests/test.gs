@@ -1,1 +1,1 @@
-print: "This is my string".split()
+operation: randomBs
