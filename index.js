@@ -3,8 +3,16 @@ exports.__esModule = true;
 exports.Compiler = void 0;
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
- */
+**/
 var fs = require("fs");
+var Warner = /** @class */ (function () {
+    function Warner() {
+    }
+    Warner.prototype.warn = function (warningText) {
+        return console.log(warningText);
+    };
+    return Warner;
+}());
 var Compiler = /** @class */ (function () {
     function Compiler(file) {
         this.code = fs.readFileSync(file, "utf-8").split("\n");
@@ -12,6 +20,7 @@ var Compiler = /** @class */ (function () {
     Compiler.prototype.compile = function () {
         var output = [];
         var variables = {};
+        var warner = new Warner();
         var _loop_1 = function (line) {
             switch (true) {
                 case line.startsWith("//"):
@@ -37,7 +46,7 @@ var Compiler = /** @class */ (function () {
                             !operationData.includes("-") &&
                             !operationData.includes("*") &&
                             !operationData.includes("/")) {
-                            output.push("Incorrect Syntax");
+                            warner.warn("Error: Invalid Syntax");
                         }
                         else if (operationData[1] === "+") {
                             output.push(Number(operationData[0]) + Number(operationData[2]));
@@ -64,7 +73,7 @@ var Compiler = /** @class */ (function () {
                                 !operationData.includes("-") &&
                                 !operationData.includes("*") &&
                                 !operationData.includes("/")) {
-                                output.push("Incorrect Syntax");
+                                warner.warn("Error: Invalid Syntax");
                             }
                             else if (operationData[1] === "+") {
                                 output.push(Number(operationData[0]) + Number(operationData[2]));
@@ -82,14 +91,14 @@ var Compiler = /** @class */ (function () {
                     }
                     break;
                 case line.startsWith("operation"):
-                    output.push("Invalid Syntax");
+                    warner.warn("Error: Invalid Syntax");
                     break;
                 case line.startsWith("def"):
                     var defArray = line.slice(5).split(" = ");
                     var variableName = defArray[0];
                     variables[variableName] = defArray[1];
                 case !line.startsWith("print") && !line.startsWith("def") && !line.startsWith("//"):
-                    output.push("Error: Invalid syntax.");
+                    warner.warn("Error: Invalid Syntax");
                     break;
             }
         };
