@@ -20,19 +20,20 @@ class Compiler {
 
     for (const line of this.code) {
       switch (true) {
+        case line === "":
+          break;
         case line.startsWith("//"):
           break;
         case line.startsWith("print"):
           if (line.startsWith('print: "')) {
             const printLine: any = line.trim().slice(8, -1);
             const res: any = [];
-            if(line.endsWith(".split()")) {
-              line.slice(8, -9).split(" ").forEach((partOfString: any) => {
+            if(line.endsWith('.split(" ")')) {
+              line.slice(8, -12).split(" ").forEach((partOfString: any) => {
                 res.push(`${partOfString}`)
               });
 
               output.push(res);
-              console.log(output);
             } else output.push(printLine);
           } else if (line.includes("operation")) {
             const printLine: any = line.trim().slice(7).split(" ");

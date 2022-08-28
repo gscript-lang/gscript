@@ -18,18 +18,19 @@ var Compiler = /** @class */ (function () {
         var variables = {};
         var _loop_1 = function (line) {
             switch (true) {
+                case line === "":
+                    break;
                 case line.startsWith("//"):
                     break;
                 case line.startsWith("print"):
                     if (line.startsWith('print: "')) {
                         var printLine = line.trim().slice(8, -1);
                         var res_1 = [];
-                        if (line.endsWith(".split()")) {
-                            line.slice(8, -9).split(" ").forEach(function (partOfString) {
+                        if (line.endsWith('.split(" ")')) {
+                            line.slice(8, -12).split(" ").forEach(function (partOfString) {
                                 res_1.push("".concat(partOfString));
                             });
                             output.push(res_1);
-                            console.log(output);
                         }
                         else
                             output.push(printLine);
