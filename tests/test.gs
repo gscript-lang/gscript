@@ -1,1 +1,1 @@
-operation: randomBs
+print: "My String".split(" ")
