@@ -5,22 +5,17 @@ exports.Compiler = void 0;
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
 **/
 var fs = require("fs");
-var Warner = /** @class */ (function () {
-    function Warner() {
-    }
-    Warner.prototype.warn = function (warningText) {
-        return console.log(warningText);
-    };
-    return Warner;
-}());
+var chalk = require('chalk');
 var Compiler = /** @class */ (function () {
     function Compiler(file) {
         this.code = fs.readFileSync(file, "utf-8").split("\n");
     }
+    Compiler.prototype.warn = function (text) {
+        return console.log(chalk.red("".concat(text, "\n")));
+    };
     Compiler.prototype.compile = function () {
         var output = [];
         var variables = {};
-        var warner = new Warner();
         var _loop_1 = function (line) {
             switch (true) {
                 case line.startsWith("//"):
@@ -30,8 +25,8 @@ var Compiler = /** @class */ (function () {
                         var printLine = line.trim().slice(8, -1);
                         var res_1 = [];
                         if (line.endsWith(".split()")) {
-                            line.slice(8, -9).split(" ").forEach(function (word) {
-                                res_1.push("".concat(word));
+                            line.slice(8, -9).split(" ").forEach(function (partOfString) {
+                                res_1.push("".concat(partOfString));
                             });
                             output.push(res_1);
                             console.log(output);
@@ -46,7 +41,7 @@ var Compiler = /** @class */ (function () {
                             !operationData.includes("-") &&
                             !operationData.includes("*") &&
                             !operationData.includes("/")) {
-                            warner.warn("Error: Invalid Syntax");
+                            this_1.warn("Error: Invalid Syntax");
                         }
                         else if (operationData[1] === "+") {
                             output.push(Number(operationData[0]) + Number(operationData[2]));
@@ -73,7 +68,7 @@ var Compiler = /** @class */ (function () {
                                 !operationData.includes("-") &&
                                 !operationData.includes("*") &&
                                 !operationData.includes("/")) {
-                                warner.warn("Error: Invalid Syntax");
+                                this_1.warn("Error: Invalid Syntax");
                             }
                             else if (operationData[1] === "+") {
                                 output.push(Number(operationData[0]) + Number(operationData[2]));
@@ -91,17 +86,18 @@ var Compiler = /** @class */ (function () {
                     }
                     break;
                 case line.startsWith("operation"):
-                    warner.warn("Error: Invalid Syntax");
+                    this_1.warn("Error: Invalid Syntax");
                     break;
                 case line.startsWith("def"):
                     var defArray = line.slice(5).split(" = ");
                     var variableName = defArray[0];
                     variables[variableName] = defArray[1];
                 case !line.startsWith("print") && !line.startsWith("def") && !line.startsWith("//"):
-                    warner.warn("Error: Invalid Syntax");
+                    this_1.warn("Error: Invalid Syntax");
                     break;
             }
         };
+        var this_1 = this;
         for (var _i = 0, _a = this.code; _i < _a.length; _i++) {
             var line = _a[_i];
             _loop_1(line);
@@ -109,6 +105,7 @@ var Compiler = /** @class */ (function () {
         return output;
     };
     Compiler.prototype.run = function () {
+        this.warn("GScript is currently in beta! Not suitable for production. Use at your own risk!");
         var output = this.compile();
         for (var _i = 0, output_1 = output; _i < output_1.length; _i++) {
             var line = output_1[_i];
