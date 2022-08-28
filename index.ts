@@ -2,16 +2,7 @@
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
 **/
 import * as fs from "fs";
-
-class Warner {
-
-  constructor() {
-  }
-
-  warn(warningText) {
-    return console.log(warningText);
-  }
-}
+const chalk = require('chalk');
 
 class Compiler {
   code: any;
@@ -19,10 +10,13 @@ class Compiler {
     this.code = fs.readFileSync(file, "utf-8").split("\n");
   }
 
+  warn(text: string) {
+    return console.log(chalk.red(`${text}\n`));
+  }
+
   compile() {
     const output: any[] = [];
     const variables: any = {};
-    const warner = new Warner();
 
     for (const line of this.code) {
       switch (true) {
@@ -33,8 +27,8 @@ class Compiler {
             const printLine: any = line.trim().slice(8, -1);
             const res: any = [];
             if(line.endsWith(".split()")) {
-              line.slice(8, -9).split(" ").forEach((word: any) => {
-                res.push(`${word}`)
+              line.slice(8, -9).split(" ").forEach((partOfString: any) => {
+                res.push(`${partOfString}`)
               });
 
               output.push(res);
@@ -49,7 +43,7 @@ class Compiler {
               !operationData.includes("*") &&
               !operationData.includes("/")
             ) {
-              warner.warn("Error: Invalid Syntax")
+              this.warn("Error: Invalid Syntax")
             } else if (operationData[1] === "+") {
               output.push(Number(operationData[0]) + Number(operationData[2]));
             } else if (operationData[1] === "-") {
@@ -72,7 +66,7 @@ class Compiler {
                 !operationData.includes("*") &&
                 !operationData.includes("/")
               ) {
-                warner.warn("Error: Invalid Syntax")
+                this.warn("Error: Invalid Syntax")
               } else if (operationData[1] === "+") {
                 output.push(
                   Number(operationData[0]) + Number(operationData[2])
@@ -95,14 +89,14 @@ class Compiler {
 
           break;
         case line.startsWith("operation"):
-          warner.warn("Error: Invalid Syntax")
+          this.warn("Error: Invalid Syntax")
           break;
         case line.startsWith("def"):
           const defArray = line.slice(5).split(" = ");
           const variableName: string = defArray[0];
           variables[variableName as keyof typeof variables] = defArray[1];
         case !line.startsWith("print") && !line.startsWith("def") && !line.startsWith("//"):
-          warner.warn("Error: Invalid Syntax")
+          this.warn("Error: Invalid Syntax")
           break;
       }
     }
@@ -111,6 +105,7 @@ class Compiler {
   }
 
   run() {
+    this.warn("GScript is currently in beta! Not suitable for production. Use at your own risk!")
     const output = this.compile();
     for(const line of output) {
       console.log(line)
