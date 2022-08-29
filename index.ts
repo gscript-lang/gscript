@@ -17,10 +17,13 @@ class Compiler {
   compile() {
     const output: any[] = [];
     const variables: any = {};
+    let lineEndings: string;
 
     for (const line of this.code) {
+      const LINE_ENDING = line.endsWith("\r\n") ? "\r\n" : "\n";
+
       switch (true) {
-        case line === "":
+        case !line && line === "":
           break;
         case line.startsWith("//"):
           break;
@@ -29,12 +32,18 @@ class Compiler {
             const printLine: any = line.trim().slice(8, -1);
             const res: any = [];
             if(line.endsWith('.split(" ")')) {
-              line.slice(8, -12).split(" ").forEach((partOfString: any) => {
+              line.slice(8, -12).split(" ").forEach((partOfString: string) => {
                 res.push(`${partOfString}`)
               });
 
               output.push(res);
-            } else output.push(printLine);
+            } else if(!line.endsWith('.split(" ")') && line.includes('.split(" ")')) {
+              line.slice(8, -14).split(" ").forEach((partOfString: string) => {
+                res.push(`${partOfString}`)
+              });
+
+              output.push(res);
+            }  else output.push(printLine);
           } else if (line.includes("operation")) {
             const printLine: any = line.trim().slice(7).split(" ");
             const operationData: any = printLine.slice(1);
