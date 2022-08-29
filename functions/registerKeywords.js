@@ -23,34 +23,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Compiler = void 0;
-/**
- * Syntax: No Tabs Or Spaces Other Than Between Keywords.
-**/
+exports.run = void 0;
 const fs = __importStar(require("fs"));
-const chalk = require('chalk');
-const registerKeywords = __importStar(require("./functions/registerKeywords"));
-class Compiler {
-    constructor(file) {
-        this.code = fs.readFileSync(file, "utf-8").split("\n");
-    }
-    warn(text) {
-        return console.log(chalk.red(`${text}\n`));
-    }
-    compile() {
-        const output = [];
-        const variables = {};
-        for (const line of this.code) {
-            registerKeywords.run(line, output, this.warn, variables);
+const keywordFiles = fs.readdirSync("./keywords");
+function run(line, output, warn, variables) {
+    keywordFiles.forEach(keywordFile => {
+        if (!keywordFile.endsWith('.js'))
+            return;
+        const keyword = require(`../keywords/${keywordFile}`);
+        if (!line.startsWith("//")) {
+            if (line.startsWith(keyword.name)) {
+                keyword.run(line, output, warn, variables);
+            }
         }
-        return output;
-    }
-    run() {
-        this.warn("GScript is currently in beta! Not suitable for production. Use at your own risk!");
-        const output = this.compile();
-        for (const line of output) {
-            console.log(line);
-        }
-    }
+        else
+            return;
+    });
 }
-exports.Compiler = Compiler;
+exports.run = run;
