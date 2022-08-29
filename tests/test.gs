@@ -1,1 +1,2 @@
-print: "My String".split(" ")
+print: "My String".split(" ") 
+print: "Test"

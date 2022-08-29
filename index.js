@@ -16,9 +16,11 @@ var Compiler = /** @class */ (function () {
     Compiler.prototype.compile = function () {
         var output = [];
         var variables = {};
+        var lineEndings;
         var _loop_1 = function (line) {
+            var LINE_ENDING = line.endsWith("\r\n") ? "\r\n" : "\n";
             switch (true) {
-                case line === "":
+                case !line && line === "":
                     break;
                 case line.startsWith("//"):
                     break;
@@ -28,6 +30,12 @@ var Compiler = /** @class */ (function () {
                         var res_1 = [];
                         if (line.endsWith('.split(" ")')) {
                             line.slice(8, -12).split(" ").forEach(function (partOfString) {
+                                res_1.push("".concat(partOfString));
+                            });
+                            output.push(res_1);
+                        }
+                        else if (!line.endsWith('.split(" ")') && line.includes('.split(" ")')) {
+                            line.slice(8, -14).split(" ").forEach(function (partOfString) {
                                 res_1.push("".concat(partOfString));
                             });
                             output.push(res_1);
