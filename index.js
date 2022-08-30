@@ -27,6 +27,7 @@ exports.Compiler = void 0;
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
 **/
+require('module-alias/register');
 const fs = __importStar(require("fs"));
 const chalk = require('chalk');
 const registerKeywords = __importStar(require("./functions/registerKeywords"));
