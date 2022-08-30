@@ -1,3 +1,5 @@
+import split from '@methods/split'
+
 module.exports = {
     name: "print",
     syntax: "print: value",
@@ -6,14 +8,18 @@ module.exports = {
             const printLine: any = line.trim().slice(8, -1);
             const res: any = [];
             if(line.endsWith('.split(" ")')) {
-              line.slice(8, -12).split(" ").forEach((partOfString: string) => {
-                res.push(`${partOfString}`)
+              split.run(line, warn, variables, 8, -12, (response: any) => {
+                response.forEach((partOfString: string) => {
+                  res.push(partOfString);
+                });
               });
 
               output.push(res);
             } else if(!line.endsWith('.split(" ")') && line.includes('.split(" ")')) {
-              line.slice(8, -14).split(" ").forEach((partOfString: string) => {
-                res.push(`${partOfString}`)
+              split.run(line, warn, variables, 8, -14, (response: any) => {
+                response.forEach((partOfString: string) => {
+                  res.push(partOfString);
+                });
               });
 
               output.push(res);

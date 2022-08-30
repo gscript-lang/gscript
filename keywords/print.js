@@ -1,4 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const split_1 = __importDefault(require("@methods/split"));
 module.exports = {
     name: "print",
     syntax: "print: value",
@@ -7,14 +12,18 @@ module.exports = {
             const printLine = line.trim().slice(8, -1);
             const res = [];
             if (line.endsWith('.split(" ")')) {
-                line.slice(8, -12).split(" ").forEach((partOfString) => {
-                    res.push(`${partOfString}`);
+                split_1.default.run(line, warn, variables, 8, -12, (response) => {
+                    response.forEach((partOfString) => {
+                        res.push(partOfString);
+                    });
                 });
                 output.push(res);
             }
             else if (!line.endsWith('.split(" ")') && line.includes('.split(" ")')) {
-                line.slice(8, -14).split(" ").forEach((partOfString) => {
-                    res.push(`${partOfString}`);
+                split_1.default.run(line, warn, variables, 8, -14, (response) => {
+                    response.forEach((partOfString) => {
+                        res.push(partOfString);
+                    });
                 });
                 output.push(res);
             }

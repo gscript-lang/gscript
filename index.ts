@@ -1,6 +1,7 @@
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
 **/
+require('module-alias/register');
 import * as fs from "fs";
 const chalk = require('chalk');
 import * as registerKeywords from './functions/registerKeywords';
