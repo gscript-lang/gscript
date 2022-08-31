@@ -44,10 +44,28 @@ module.exports = {
               output.push(Number(operationData[0]) / Number(operationData[2]));
             }
           } else {
+            const res: any[] = [];
             const printLine = line.trim().slice(7);
             const variableValue: string = variables[printLine as keyof object];
             if (!variableValue.includes("operation")) {
-              output.push(variableValue.slice(1, -2));
+              if(variableValue.endsWith('.split(" ")')) {
+                split.run(variableValue, warn, variables, 1, -12, (response: any) => {
+                  response.forEach((partOfString: string) => {
+                    res.push(partOfString);
+                  });
+                });
+  
+                output.push(res);
+              } else if(!variableValue.endsWith('.split(" ")') && variableValue.includes('.split(" ")')) {
+                split.run(variableValue, warn, variables, 1, -14, (response: any) => {
+                  response.forEach((partOfString: string) => {
+                    res.push(partOfString);
+                  });
+                });
+  
+                output.push(res);
+              } else output.push(variableValue.slice(1, -2));
+              // Operations
             } else if (variableValue.includes("operation")) {
               const operationData = variableValue.split(" ").slice(1);
               if (
