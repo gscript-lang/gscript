@@ -1,4 +1,3 @@
-print: "My String".split(" ") 
-def: fun = operation 7 + 1
+print: "My String 1".split(" ") 
+def: fun = "My String 2".split(" ") 
 print: fun
-print: "test"

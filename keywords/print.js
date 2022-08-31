@@ -53,10 +53,29 @@ module.exports = {
             }
         }
         else {
+            const res = [];
             const printLine = line.trim().slice(7);
             const variableValue = variables[printLine];
             if (!variableValue.includes("operation")) {
-                output.push(variableValue.slice(1, -2));
+                if (variableValue.endsWith('.split(" ")')) {
+                    split_1.default.run(variableValue, warn, variables, 1, -12, (response) => {
+                        response.forEach((partOfString) => {
+                            res.push(partOfString);
+                        });
+                    });
+                    output.push(res);
+                }
+                else if (!variableValue.endsWith('.split(" ")') && variableValue.includes('.split(" ")')) {
+                    split_1.default.run(variableValue, warn, variables, 1, -14, (response) => {
+                        response.forEach((partOfString) => {
+                            res.push(partOfString);
+                        });
+                    });
+                    output.push(res);
+                }
+                else
+                    output.push(variableValue.slice(1, -2));
+                // Operations
             }
             else if (variableValue.includes("operation")) {
                 const operationData = variableValue.split(" ").slice(1);
