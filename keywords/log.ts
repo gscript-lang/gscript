@@ -1,14 +1,14 @@
 import split from '@methods/split'
 
 module.exports = {
-    name: "print",
-    syntax: "print: value",
-    run: (line: any, output: any[], warn: any, variables: any) => {
-        if (line.startsWith('print: "')) {
-            const printLine: any = line.trim().slice(8, -1);
+    name: "log",
+    syntax: "log: value",
+    run: function(line: any, output: any[], warn: any, variables: any) {
+        if (line.startsWith('log: "')) {
+            const logLine: any = line.trim().slice(this.name.length + 3, -1);
             const res: any = [];
             if(line.endsWith('.split(" ")')) {
-              split.run(line, warn, variables, 8, -12, (response: any) => {
+              split.run(line, warn, variables, this.name.length + 3, -12, (response: any) => {
                 response.forEach((partOfString: string) => {
                   res.push(partOfString);
                 });
@@ -16,17 +16,17 @@ module.exports = {
 
               output.push(res);
             } else if(!line.endsWith('.split(" ")') && line.includes('.split(" ")')) {
-              split.run(line, warn, variables, 8, -14, (response: any) => {
+              split.run(line, warn, variables, this.name.length + 3, -14, (response: any) => {
                 response.forEach((partOfString: string) => {
                   res.push(partOfString);
                 });
               });
 
               output.push(res);
-            }  else output.push(printLine);
+            }  else output.push(logLine);
           } else if (line.includes("operation")) {
-            const printLine: any = line.trim().slice(7).split(" ");
-            const operationData: any = printLine.slice(1);
+            const logLine: any = line.trim().slice(this.name.length + 2).split(" ");
+            const operationData: any = logLine.slice(1);
             if (
               !operationData.includes("+") &&
               !operationData.includes("-") &&
@@ -45,8 +45,8 @@ module.exports = {
             }
           } else {
             const res: any[] = [];
-            const printLine = line.trim().slice(7);
-            const variableValue: string = variables[printLine as keyof object];
+            const logLine = line.trim().slice(this.name.length + 2);
+            const variableValue: string = variables[logLine as keyof object];
             if (!variableValue.includes("operation")) {
               if(variableValue.endsWith('.split(" ")')) {
                 split.run(variableValue, warn, variables, 1, -12, (response: any) => {
