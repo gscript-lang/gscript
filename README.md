@@ -30,37 +30,43 @@ or
 
 ## Syntax
 
-At the moment, there are only two keywords, `def`, and `print`.
+At the moment, there are only two keywords, `def`, and `log`.
 <br/>
 `def` defines a variable and it's corresponding value.
 <br/>
-`print` prints something in the console
+`log` logs something in the console
 <br/>
 `//` at the start of a line means that it is a comment.
-<br/>
-All keywords must be suffixed with `:`.
 <br/>
 
 ## Examples:
 
 ```gs
-def: HW = "Hello World";
-print: HW;
+def HW = "Hello World"
+log HW
 // returns Hello World
 ```
 
 <br/>
 
 ```gs
-def: MyArr = ["MyArray"];
-print: MyArr;
+def MyArr = ["MyArray"]
+log MyArr
 // returns ["MyArray"]
 ```
 
 <br>
 
 ```gs
-// print a string
-print: "This is a string";
+// log a string
+log "This is a string"
 // returns This is a string
+```
+
+<br>
+
+```gs
+// split a string and log it.
+log "This is a string".split(" ")
+// returns ["This", "is", "a", "string"]
 ```
