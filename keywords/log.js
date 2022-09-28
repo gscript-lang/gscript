@@ -6,21 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const split_1 = __importDefault(require("@methods/split"));
 module.exports = {
     name: "log",
-    syntax: "log: value",
+    syntax: "log value",
     run: function (line, output, warn, variables) {
-        if (line.startsWith('log: "')) {
-            const logLine = line.trim().slice(this.name.length + 3, -1);
+        if (line.startsWith('log "')) {
+            const logLine = line.trim().slice(this.name.length + 2, -1);
             const res = [];
-            if (line.endsWith('.split(" ")')) {
-                split_1.default.run(line, warn, variables, this.name.length + 3, -12, (response) => {
+            if (line.endsWith('".split(" ")')) {
+                split_1.default.run(line, warn, variables, this.name.length + 2, -12, (response) => {
                     response.forEach((partOfString) => {
                         res.push(partOfString);
                     });
                 });
                 output.push(res);
             }
-            else if (!line.endsWith('.split(" ")') && line.includes('.split(" ")')) {
-                split_1.default.run(line, warn, variables, this.name.length + 3, -14, (response) => {
+            else if (!line.endsWith('".split(" ")') && line.includes('.split(" ")')) {
+                split_1.default.run(line, warn, variables, this.name.length + 2, -14, (response) => {
                     response.forEach((partOfString) => {
                         res.push(partOfString);
                     });
@@ -31,7 +31,7 @@ module.exports = {
                 output.push(logLine);
         }
         else if (line.includes("operation")) {
-            const logLine = line.trim().slice(this.name.length + 2).split(" ");
+            const logLine = line.trim().slice(this.name.length + 1).split(" ");
             const operationData = logLine.slice(1);
             if (!operationData.includes("+") &&
                 !operationData.includes("-") &&
@@ -54,10 +54,10 @@ module.exports = {
         }
         else {
             const res = [];
-            const logLine = line.trim().slice(this.name.length + 2);
+            const logLine = line.trim().slice(this.name.length + 1);
             const variableValue = variables[logLine];
             if (!variableValue.includes("operation")) {
-                if (variableValue.endsWith('.split(" ")')) {
+                if (variableValue.endsWith('".split(" ")')) {
                     split_1.default.run(variableValue, warn, variables, 1, -12, (response) => {
                         response.forEach((partOfString) => {
                             res.push(partOfString);
@@ -65,7 +65,7 @@ module.exports = {
                     });
                     output.push(res);
                 }
-                else if (!variableValue.endsWith('.split(" ")') && variableValue.includes('.split(" ")')) {
+                else if (!variableValue.endsWith('".split(" ")') && variableValue.includes('.split(" ")')) {
                     split_1.default.run(variableValue, warn, variables, 1, -14, (response) => {
                         response.forEach((partOfString) => {
                             res.push(partOfString);
