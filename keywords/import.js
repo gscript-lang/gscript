@@ -6,5 +6,5 @@ module.exports = {
         imports.forEach((importFN) => {
             console.log(importFN);
         });
-    }
+    },
 };

@@ -26,9 +26,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = void 0;
 const fs = __importStar(require("fs"));
 const keywordFiles = fs.readdirSync("./keywords");
-function run(line, output, warn, variables) {
-    keywordFiles.forEach(keywordFile => {
-        if (!keywordFile.endsWith('.js'))
+function run(line, output, warn, variables, codeArray, filename) {
+    keywordFiles.forEach((keywordFile) => {
+        if (!keywordFile.endsWith(".js"))
             return;
         const keyword = require(`../keywords/${keywordFile}`);
         if (!line.startsWith("//")) {
@@ -40,7 +40,6 @@ function run(line, output, warn, variables) {
                 else {
                     keyword.run(line, output, warn, variables);
                 }
-                ;
             }
         }
         else
