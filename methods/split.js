@@ -10,5 +10,5 @@ exports.default = {
             res.push(partOfString);
         });
         callback(res);
-    }
+    },
 };

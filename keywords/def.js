@@ -6,5 +6,5 @@ module.exports = {
         const defArray = line.slice(4).split(" = ");
         const variableName = defArray[0];
         variables[variableName] = defArray[1];
-    }
+    },
 };

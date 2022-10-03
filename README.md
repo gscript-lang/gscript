@@ -7,7 +7,9 @@ A new programming language built on TypeScript ✨
 ## IN EARLY DEVELOPMENT STAGES
 
 ## Install
+
 Prerequisites:
+
 - Node JS
 - NPM
 

@@ -26,14 +26,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Compiler = void 0;
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
-**/
-require('module-alias/register');
+ **/
+require("module-alias/register");
 const fs = __importStar(require("fs"));
-const chalk = require('chalk');
+const chalk = require("chalk");
 const registerKeywords = __importStar(require("./functions/registerKeywords"));
 class Compiler {
     constructor(file) {
         this.code = fs.readFileSync(file, "utf-8").split("\n");
+        this.filename = file.slice(0, -2);
     }
     warn(text) {
         return console.log(chalk.red(`${text}\n`));
@@ -42,7 +43,7 @@ class Compiler {
         const output = [];
         const variables = {};
         for (const line of this.code) {
-            registerKeywords.run(line, output, this.warn, variables);
+            registerKeywords.run(line, output, this.warn, variables, this.code, this.filename);
         }
         return output;
     }
