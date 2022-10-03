@@ -8,7 +8,12 @@ export function run(line: string, output: any[], warn: any, variables: any) {
 
         if(!line.startsWith("//")) {
             if(line.startsWith(keyword.name)) {
-                keyword.run(line, output, warn, variables);
+                if(keyword.name === "import"){
+                    const imports = line.trim().split(" ").slice(1);
+                    keyword.run(line, output, warn, variables, imports);
+                } else {
+                    keyword.run(line, output, warn, variables);
+                };
             }
         } else return;
     });
