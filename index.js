@@ -39,11 +39,14 @@ class Compiler {
     warn(text) {
         return console.log(chalk.red(`${text}\n`));
     }
+    message(text) {
+        return console.log(chalk.blue(`${text}\n`));
+    }
     compile() {
         const output = [];
         const variables = {};
         for (const line of this.code) {
-            registerKeywords.run(line, output, this.warn, variables, this.code, this.filename);
+            registerKeywords.run(line, output, this.warn, this.message, variables, this.code, this.filename);
         }
         return output;
     }

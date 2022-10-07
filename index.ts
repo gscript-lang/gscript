@@ -18,12 +18,16 @@ class Compiler {
     return console.log(chalk.red(`${text}\n`));
   }
 
+  message(text: string) {
+    return console.log(chalk.blue(`${text}\n`));
+  }
+
   compile() {
     const output: any[] = [];
     const variables: any = {};
 
     for (const line of this.code) {
-      registerKeywords.run(line, output, this.warn, variables, this.code, this.filename);
+      registerKeywords.run(line, output, this.warn, this.message, variables, this.code, this.filename);
     }
 
     return output;
