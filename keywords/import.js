@@ -32,7 +32,13 @@ module.exports = {
             message(`Imported GScript Module: ` + gs_module + " ✨");
             const variableName = gs_module;
             const path = process.argv.slice(1)[0].slice(0, -9).replace(/\\/g, "/");
-            variables[variableName] = path + '/gs_modules/' + gs_module + '/' + fs.readdirSync(`${path}/gs_modules/${gs_module}`);
+            try {
+                const moduleFiles = fs.readdirSync(`${path}/gs_modules/${gs_module}`);
+                variables[variableName] = path + '/gs_modules/' + gs_module + '/' + moduleFiles;
+            }
+            catch (err) {
+                warn(`Module Error: ${gs_module} Not Found (/gs_modules)`);
+            }
         });
     },
 };
