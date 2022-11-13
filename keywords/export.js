@@ -25,30 +25,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 module.exports = {
-    name: "import",
-    syntax: "import <package-name>",
-    run: (line, output, warn, variables, imports, message) => {
-        imports.forEach((gs_module) => {
-            message(`Imported GScript Module: ${gs_module} ✨`);
-            const variableName = gs_module;
-            const path = process.argv.slice(1)[0].slice(0, -9).replace(/\\/g, "/");
-            try {
-                const moduleFiles = fs.readdirSync(`${path}/gs_modules/${gs_module}`);
-                const lines = fs.readFileSync(`${path}/gs_modules/${gs_module}/${moduleFiles}`, "utf-8").trim().split("\n");
-                const pkgVarDef = lines.filter((s) => s.startsWith("def "))[0].trim().slice(4);
-                const pkgVarValue = pkgVarDef.split(" = ").slice(1)[0];
-                lines.forEach((l) => {
-                    if (l.startsWith("export default")) {
-                        variables[variableName] = pkgVarValue;
-                    }
-                });
-            }
-            catch (err) {
-                warn(`Module Error {
-          Module: "${gs_module}",
-          Error: "${err}"
-        }`);
-            }
-        });
+    name: "export",
+    syntax: "export <module-name>",
+    run: function (line, output, warn, variables, imports, message) {
+        const module = line.slice(this.name.length + 1);
+        message(`Exported GScript Module: ${module} ✨`);
+        const variableName = module;
+        const path = process.argv.slice(1)[0].slice(0, -9).replace(/\\/g, "/");
+        try {
+            const moduleFiles = fs.readdirSync(`${path}/gs_modules/${module}`);
+            variables[variableName] = path + '/gs_modules/' + module + '/' + moduleFiles;
+        }
+        catch (err) {
+            warn(`Module Error: ${module} Not Found (/gs_modules)`);
+        }
     },
 };

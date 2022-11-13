@@ -66,7 +66,7 @@ module.exports = {
     } else {
       const res: any[] = [];
       const logLine = line.trim().slice(this.name.length + 1);
-      const variableValue: string = variables[logLine as keyof object];
+      const variableValue: any = variables[logLine as keyof typeof variables];
       if (!variableValue.includes("operation")) {
         if (variableValue.endsWith('".split(" ")')) {
           split.run(variableValue, warn, variables, 1, -12, (response: any) => {

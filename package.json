@@ -1,14 +1,11 @@
 {
   "name": "gscript-compiler",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A new programming language built on JavaScript ✨",
   "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
-    "compile": "tsc index.ts",
-    "test": "node ./tests/index.js"
+    "typescript": "tsc -w",
+    "test": "node ./tests/test1.js"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,3 @@
 const { Compiler } = require("../index.js");
-const comp = new Compiler("./tests/test.gs");
+const comp = new Compiler("./tests/test1.gs");
 comp.run();
