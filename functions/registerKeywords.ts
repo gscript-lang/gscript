@@ -1,5 +1,5 @@
 import * as fs from "fs";
-const keywordFiles = fs.readdirSync("./keywords");
+const keywordFiles = fs.readdirSync("../keywords");
 
 export function run(line: string, output: any[], warn: any, message: any, variables: any, codeArray: any, filename: string) {
   keywordFiles.forEach((keywordFile) => {
