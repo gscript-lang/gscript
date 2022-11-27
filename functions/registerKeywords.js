@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = void 0;
 const fs = __importStar(require("fs"));
-const keywordFiles = fs.readdirSync("../keywords");
+const keywordFiles = fs.readdirSync("./keywords");
 function run(line, output, warn, message, variables, codeArray, filename) {
     keywordFiles.forEach((keywordFile) => {
         if (!keywordFile.endsWith(".js"))

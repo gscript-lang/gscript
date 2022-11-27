@@ -36,10 +36,15 @@ module.exports = {
                 const moduleFiles = fs.readdirSync(`${path}/gs_modules/${gs_module}`);
                 const lines = fs.readFileSync(`${path}/gs_modules/${gs_module}/${moduleFiles}`, "utf-8").trim().split("\n");
                 const pkgVarDef = lines.filter((s) => s.startsWith("def "))[0].trim().slice(4);
-                const pkgVarValue = pkgVarDef.split(" = ").slice(1)[0];
+                const pkgVarArray = pkgVarDef.split(" = ");
+                const pkgVarValue = pkgVarArray[1];
+                const pkgVarName = pkgVarArray[0];
                 lines.forEach((l) => {
                     if (l.startsWith("export default")) {
                         variables[variableName] = pkgVarValue;
+                    }
+                    if (l.startsWith("export") && !l.includes("default")) {
+                        variables[variableName] = `{{${pkgVarName}: ${pkgVarValue}}}}`;
                     }
                 });
             }
