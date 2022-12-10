@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Compiler = void 0;
+exports.CompilerError = exports.Compiler = void 0;
 /**
  * Syntax: No Tabs Or Spaces Other Than Between Keywords.
  **/
@@ -59,3 +59,12 @@ class Compiler {
     }
 }
 exports.Compiler = Compiler;
+class CompilerError {
+    constructor(error) {
+        this.error = error;
+    }
+    throw() {
+        console.log(chalk.bgRed.white("GScript Compiler Error:") + " " + chalk.white.bgBlack(this.error));
+    }
+}
+exports.CompilerError = CompilerError;

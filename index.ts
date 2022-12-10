@@ -44,4 +44,15 @@ class Compiler {
   }
 }
 
-export { Compiler };
+class CompilerError {
+  error: string;
+  constructor(error: string) {
+    this.error = error;
+  }
+
+  throw() {
+    console.log(chalk.bgRed.white("GScript Compiler Error:") + " " + chalk.white.bgBlack(this.error))
+  }
+}
+
+export { Compiler, CompilerError };

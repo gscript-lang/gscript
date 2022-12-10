@@ -44,7 +44,7 @@ module.exports = {
                         variables[variableName] = pkgVarValue;
                     }
                     if (l.startsWith("export") && !l.includes("default")) {
-                        variables[variableName] = `{{${pkgVarName}: ${pkgVarValue}}}}`;
+                        variables[variableName] = ` {${pkgVarName}: ${pkgVarValue}}  `;
                     }
                 });
             }

@@ -30,7 +30,7 @@ module.exports = {
           }
 
           if(l.startsWith("export") && !l.includes("default")) {
-            variables[variableName as keyof typeof variables] = `{{${pkgVarName}: ${pkgVarValue}}}}`;
+            variables[variableName as keyof typeof variables] = ` {${pkgVarName}: ${pkgVarValue}}  `;
           }
         });
 
